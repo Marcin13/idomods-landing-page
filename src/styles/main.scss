@@ -426,6 +426,21 @@ address { font-style: normal; }
   .is-lit > & { opacity: 1; }
 }
 
+.hero__pool {
+  position: absolute;
+  top: 0;
+  left: 0;
+  aspect-ratio: 3.4;
+  background: radial-gradient(closest-side, rgba(255, 230, 170, 0.72), rgba(255, 214, 130, 0.26) 52%, rgba(255, 214, 130, 0));
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $duration-tile-image $ease-in-out;
+  will-change: transform;
+
+  &.is-on.is-landed { opacity: 1; }
+}
+
 .lamp {
   position: absolute;
   top: var(--lamp-top);
@@ -454,8 +469,6 @@ address { font-style: normal; }
   --face-height: 36.6%;
   --face-rotate: -14deg;
   --beam-rotate: -14deg;
-  --float-time: 6.4s;
-  --float-delay: -1.2s;
 }
 
 .lamp--cream {
@@ -469,8 +482,6 @@ address { font-style: normal; }
   --face-height: 38.5%;
   --face-rotate: -14deg;
   --beam-rotate: -14deg;
-  --float-time: 7.6s;
-  --float-delay: -3.4s;
 }
 
 .lamp--olive {
@@ -484,8 +495,6 @@ address { font-style: normal; }
   --face-height: 26.4%;
   --face-rotate: 25deg;
   --beam-rotate: 28deg;
-  --float-time: 5.8s;
-  --float-delay: -2.1s;
 }
 
 .lamp__float {
@@ -493,7 +502,6 @@ address { font-style: normal; }
   display: block;
   width: 100%;
   height: 100%;
-  animation: lamp-float var(--float-time) $ease-in-out var(--float-delay) infinite alternate;
 }
 
 .lamp__beam,
@@ -510,9 +518,18 @@ address { font-style: normal; }
 .lamp__beam {
   width: 240%;
   height: 300%;
-  background: radial-gradient(58% 100% at 50% 0, rgba(255, 232, 176, 0.5), rgba(255, 226, 160, 0.14) 58%, rgba(255, 226, 160, 0) 100%);
-  clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%);
   filter: blur(1.5rem);
+  will-change: transform;
+
+  // The shape is clipped inside the blurred layer so its edges stay soft.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(58% 100% at 50% 0, rgba(255, 232, 176, 0.5), rgba(255, 226, 160, 0.2) 62%, rgba(255, 226, 160, 0) 100%);
+    clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%);
+  }
+
   transform: translateX(-50%) rotate(var(--beam-rotate));
   transform-origin: 50% 0;
 }
@@ -548,11 +565,6 @@ address { font-style: normal; }
 @keyframes slide-settle {
   from { transform: scale($scale-slide-start); }
   to { transform: scale(1); }
-}
-
-@keyframes lamp-float {
-  from { transform: translateY(-1.4%) rotate(-1.4deg); }
-  to { transform: translateY(1.4%) rotate(1.4deg); }
 }
 
 @keyframes hero-progress {
