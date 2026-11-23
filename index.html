@@ -8,9 +8,47 @@
   <meta name="theme-color" content="#101011">
   <link rel="preload" href="src/assets/fonts/red-hat-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="dist/main.css">
+  <script src="src/js/main.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Przejdź do treści</a>
+
+  <header class="site-header" data-header>
+    <div class="site-header__inner">
+      <a class="site-header__logo" href="#" aria-label="SOLLUX, strona główna">
+        <img src="src/assets/logos/sollux-nav.svg" alt="" width="150" height="48">
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Główna">
+        <ul class="main-nav__list">
+          <li><a href="#">Lampy <img src="src/assets/icons/angle-down.svg" alt="" width="16" height="16"></a></li>
+          <li><a href="#">Kolory <img src="src/assets/icons/angle-down.svg" alt="" width="16" height="16"></a></li>
+          <li><a href="#">Pomieszczenia <img src="src/assets/icons/angle-down.svg" alt="" width="16" height="16"></a></li>
+          <li><a href="#">Nowości</a></li>
+          <li><a href="#">Bestsellery</a></li>
+          <li><a href="#">Promocje</a></li>
+        </ul>
+      </nav>
+
+      <form class="search" role="search" action="#">
+        <label class="visually-hidden" for="search">Czego szukasz?</label>
+        <input id="search" type="search" name="q" placeholder="Czego szukasz?" autocomplete="off">
+        <button type="submit" aria-label="Szukaj"><img src="src/assets/icons/search.svg" alt="" width="20" height="20"></button>
+      </form>
+
+      <div class="header-actions">
+        <a class="header-actions__configurator" href="#">
+          <img src="src/assets/icons/cube.svg" alt="" width="20" height="20">
+          <span>Stwórz swoją lampę</span>
+        </a>
+        <a class="icon-button" href="#" aria-label="Moje konto"><img src="src/assets/icons/user.svg" alt="" width="24" height="24"></a>
+        <a class="icon-button" href="#" aria-label="Koszyk"><img src="src/assets/icons/basket.svg" alt="" width="24" height="24"></a>
+        <button class="icon-button menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Otwórz menu" data-menu-toggle>
+          <span class="menu-toggle__bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
   <main id="main">
   </main>
