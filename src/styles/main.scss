@@ -817,12 +817,12 @@ address { font-style: normal; }
   --lamp-top: 40.463%;
   --lamp-width: 20.99%;
   --lamp-ratio: 403 / 382;
-  --face-x: 59.6%;
-  --face-y: 67.8%;
-  --face-width: 54.6%;
-  --face-height: 36.6%;
-  --face-rotate: -14deg;
-  --beam-rotate: -14deg;
+  --face-x: 60%;
+  --face-y: 68.09%;
+  --face-width: 58.71%;
+  --face-height: 24.65%;
+  --face-rotate: -29.68deg;
+  --beam-rotate: -29.68deg;
 }
 
 .lamp--cream {
@@ -830,12 +830,12 @@ address { font-style: normal; }
   --lamp-top: 10.185%;
   --lamp-width: 18.802%;
   --lamp-ratio: 361 / 374;
-  --face-x: 57.9%;
-  --face-y: 66%;
-  --face-width: 58%;
-  --face-height: 38.5%;
-  --face-rotate: -14deg;
-  --beam-rotate: -14deg;
+  --face-x: 58.75%;
+  --face-y: 65.22%;
+  --face-width: 62.28%;
+  --face-height: 32.9%;
+  --face-rotate: -32.05deg;
+  --beam-rotate: -32.05deg;
 }
 
 .lamp--olive {
@@ -843,12 +843,12 @@ address { font-style: normal; }
   --lamp-top: 31.019%;
   --lamp-width: 23.021%;
   --lamp-ratio: 442 / 417;
-  --face-x: 20.1%;
-  --face-y: 82.3%;
-  --face-width: 31.7%;
-  --face-height: 26.4%;
-  --face-rotate: 25deg;
-  --beam-rotate: 28deg;
+  --face-x: 20.3%;
+  --face-y: 81.95%;
+  --face-width: 33.68%;
+  --face-height: 18.31%;
+  --face-rotate: 34.72deg;
+  --beam-rotate: 34.72deg;
 }
 
 .lamp__float {
@@ -889,18 +889,18 @@ address { font-style: normal; }
 }
 
 .lamp__halo {
-  width: 150%;
-  aspect-ratio: 1;
-  background: radial-gradient(circle, rgba(255, 230, 170, 0.78), rgba(255, 214, 130, 0.22) 38%, rgba(255, 214, 130, 0) 68%);
-  transform: translate(-50%, -50%);
+  // The bloom follows the measured diffuser ellipse.
+  width: calc(var(--face-width) * 2.1);
+  height: calc(var(--face-height) * 2.1);
+  background: radial-gradient(closest-side, rgba(255, 230, 170, 0.78), rgba(255, 214, 130, 0.22) 56%, rgba(255, 214, 130, 0));
+  transform: translate(-50%, -50%) rotate(var(--face-rotate));
 }
 
 .lamp__face {
   width: var(--face-width);
   height: var(--face-height);
   border-radius: 50%;
-  background: radial-gradient(ellipse, #fffdf0 30%, #ffe9a6 100%);
-  box-shadow: 0 0 1.5rem rgba(255, 228, 160, 0.9);
+  background: radial-gradient(closest-side, #fffdf0 30%, #ffe9a6 100%);
   transform: translate(-50%, -50%) rotate(var(--face-rotate));
 }
 
