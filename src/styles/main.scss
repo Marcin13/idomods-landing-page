@@ -729,3 +729,64 @@ address { font-style: normal; }
   }
 }
 
+// Benefits
+.benefits-section {
+  padding-block: $space-48;
+
+  @include lg { padding-block: $space-86; }
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-8;
+  margin-bottom: $space-32;
+
+  @include md { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  @include lg {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: $space-32;
+    margin-bottom: $space-64;
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    padding: $space-12 $space-4;
+
+    @include lg { padding: $space-16; }
+  }
+
+  li:last-child {
+    @media (max-width: 47.99rem) { grid-column: 1 / -1; }
+  }
+
+  img {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-bottom: $space-12;
+
+    @include lg {
+      width: 2rem;
+      height: 2rem;
+      margin-bottom: $space-24;
+    }
+  }
+
+  h2 {
+    margin-bottom: $space-4;
+    color: $color-ink;
+    font-size: 1.0625rem;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+
+    @include lg {
+      margin-bottom: $space-8;
+      font-size: $font-size-21;
+    }
+  }
+
+  p { font-size: $font-size-14; }
+}
+
