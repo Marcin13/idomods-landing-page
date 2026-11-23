@@ -1,0 +1,120 @@
+// Design tokens from Figma: frame 1:505 (layout), frame 16:91 (motion).
+// The file defines no Figma variables, so these values come from layers.
+// Figma has no mobile frame, so no breakpoints or mobile type scale are defined.
+
+// Colors
+$color-accent: #f2bf25;
+$color-ink: #101011;
+$color-text: #1e1e1e;
+$color-white: #fff;
+$color-border: #e7e7e7;
+$color-button-hover: #4a4a4a;
+
+$color-overlay-control: rgba(16, 16, 17, 0.2);
+$color-overlay-badge: rgba(16, 16, 17, 0.4);
+$color-progress-track: rgba(231, 231, 231, 0.5);
+
+$color-tile-configurator: #72a3f3;
+$color-tile-catalog: #fdf8eb;
+$color-tile-smart: #e8e4df;
+
+// Palette shown on the configurator tile
+$color-swatch-beige: #f5f5dc;
+$color-swatch-moss: #56663e;
+$color-swatch-indigo: #3f4f8b;
+$color-swatch-taupe: #beada3;
+$color-swatch-olive: #708238;
+$color-swatch-umber: #837060;
+$color-swatch-navy: #0e2a94;
+
+// Typography
+$font-family-base: "Red Hat Display", system-ui, -apple-system, "Segoe UI", sans-serif;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+$font-size-12: 0.75rem;
+$font-size-13: 0.8125rem;
+$font-size-14: 0.875rem;
+$font-size-16: 1rem;
+$font-size-21: 1.3125rem;
+$font-size-32: 2rem;
+$font-size-56: 3.5rem;
+
+$line-height-none: 1;
+$line-height-tight: 1.1;
+$line-height-base: 1.2;
+
+// Spacing
+$space-2: 0.125rem;
+$space-4: 0.25rem;
+$space-8: 0.5rem;
+$space-12: 0.75rem;
+$space-14: 0.875rem;
+$space-16: 1rem;
+$space-24: 1.5rem;
+$space-32: 2rem;
+$space-48: 3rem;
+$space-64: 4rem;
+$space-72: 4.5rem;
+$space-86: 5.375rem;
+$space-96: 6rem;
+
+// Layout and shape
+$container-max: 100rem; // 1600px
+$container-gutter: $space-16;
+$hero-height: 67.5rem; // 1080px
+$tile-height: 32.375rem; // 518px
+$tile-gap: $space-16;
+$control-size: 3rem; // 48px
+$radius-small: 0.25rem;
+$radius-tile: 1.5rem;
+$radius-pill: 100px;
+
+// Motion
+$duration-button: 200ms;
+$duration-nav: 250ms;
+$duration-tile-image: 500ms;
+$duration-slide-fade: 600ms;
+$duration-slide-scale: 800ms;
+$slide-interval: 3000ms;
+$shader-cycle-min: 20s;
+$shader-cycle-max: 30s;
+
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$ease-out: ease-out;
+$ease-linear: linear;
+
+$scale-tile-hover: 1.1;
+$scale-slide-start: 1.05;
+
+// Runtime tokens
+:root {
+  --color-accent: #{$color-accent};
+  --color-ink: #{$color-ink};
+  --color-text: #{$color-text};
+  --color-white: #{$color-white};
+  --color-border: #{$color-border};
+  --color-button-hover: #{$color-button-hover};
+  --color-overlay-control: #{$color-overlay-control};
+  --color-overlay-badge: #{$color-overlay-badge};
+  --color-progress-track: #{$color-progress-track};
+  --color-tile-configurator: #{$color-tile-configurator};
+  --color-tile-catalog: #{$color-tile-catalog};
+  --color-tile-smart: #{$color-tile-smart};
+
+  --font-family-base: #{$font-family-base};
+
+  --container-max: #{$container-max};
+  --container-gutter: #{$container-gutter};
+  --radius-tile: #{$radius-tile};
+  --radius-pill: #{$radius-pill};
+
+  --duration-button: #{$duration-button};
+  --duration-nav: #{$duration-nav};
+  --duration-tile-image: #{$duration-tile-image};
+  --duration-slide-fade: #{$duration-slide-fade};
+  --duration-slide-scale: #{$duration-slide-scale};
+  --slide-interval: #{$slide-interval};
+  --ease-in-out: #{$ease-in-out};
+  --ease-out: #{$ease-out};
+}
