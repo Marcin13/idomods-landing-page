@@ -16,29 +16,35 @@ concurrency:
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Prepare static files
-        run: |
-          mkdir -p public
-          cp index.html public/
-          if [ -d src ]; then cp -r src public/; fi
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build website
+        run: npm run build -- --base=/idomods-landing-page/
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload static files
+      - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: ./dist
 
       - name: Deploy to GitHub Pages
         id: deployment
