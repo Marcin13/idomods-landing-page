@@ -987,3 +987,220 @@ address { font-style: normal; }
   p { font-size: $font-size-16; }
 }
 
+// Footer
+.site-footer {
+  padding-block: $space-48 $space-24;
+  font-size: $font-size-13;
+  line-height: $line-height-tight;
+
+  @include lg {
+    padding-block: $space-96 0;
+    line-height: 0.875rem; // 14px text rows from Figma
+  }
+
+  h2 {
+    margin-bottom: $space-16;
+    font-size: $font-size-13;
+    font-weight: $font-weight-bold;
+    line-height: inherit;
+
+    @include lg { margin-bottom: $space-24; }
+  }
+}
+
+.footer-top {
+  display: flex;
+  flex-direction: column;
+  gap: $space-32;
+  padding-bottom: $space-32;
+
+  @include lg {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: $space-64;
+  }
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-8;
+
+  img { width: 10rem; }
+}
+
+.footer-social {
+  display: flex;
+  gap: $space-2;
+
+  img { width: 1.5rem; }
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-32 $space-16;
+
+  @include md { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  @include lg {
+    display: flex;
+    gap: clamp(#{$space-32}, 5vw, #{$space-96});
+  }
+
+  ul {
+    display: grid;
+
+    @include lg { gap: $space-14; }
+  }
+
+  a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+
+    @include lg {
+      min-height: 0;
+
+      // Keeps a 24px pointer target without changing the 14px Figma rhythm.
+      &::after {
+        content: "";
+        position: absolute;
+        inset: -5px 0;
+      }
+    }
+  }
+}
+
+.footer-badges {
+  display: grid;
+  border-top: 1px solid $color-border;
+
+  @include lg {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: $space-16;
+  }
+
+  section {
+    padding-block: $space-24;
+
+    @include lg { padding: $space-32; }
+  }
+
+  section + section {
+    border-top: 1px solid $color-border;
+
+    @include lg {
+      border-top: 0;
+      border-left: 1px solid $color-border;
+    }
+  }
+
+  section:first-child {
+    @include lg { padding-left: 0; }
+  }
+}
+
+.footer-payments,
+.footer-awards,
+.footer-flags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-payments {
+  gap: $space-8;
+  max-width: 19.8125rem;
+
+  li { padding: 0.375rem 0.4375rem; }
+  img { width: 2.6875rem; height: 1.5rem; object-fit: contain; }
+}
+
+.footer-awards {
+  gap: 0.1875rem;
+  max-width: 18.375rem;
+}
+
+.footer-flags {
+  @include lg { gap: $space-8; }
+
+  a {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: $radius-pill;
+
+    @include lg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  img { width: 1.5rem; height: 1.5rem; }
+}
+
+.footer-caption {
+  display: grid;
+  gap: $space-16;
+  padding-top: $space-16;
+  border-top: 1px solid $color-border;
+  font-size: $font-size-12;
+
+  @include lg {
+    gap: $space-8;
+    padding-block: $space-32;
+    border-top: 0;
+    line-height: 0.8125rem; // 13px text rows from Figma
+  }
+}
+
+.footer-caption__vat {
+  display: flex;
+  flex-direction: column;
+  gap: $space-16;
+
+  @include lg {
+    flex-direction: row;
+    align-items: center;
+    gap: $space-32;
+  }
+}
+
+.footer-caption__line {
+  display: none;
+  flex: 1;
+  height: 1px;
+  background: $color-border;
+
+  @include lg { display: block; }
+}
+
+.footer-caption__logos {
+  display: flex;
+  flex: none;
+  gap: $space-8;
+}
+
+.footer-caption__contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $space-8;
+
+  @include lg {
+    flex-direction: row;
+    gap: $space-24;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
+
+    @include lg { min-height: 0; }
+  }
+}
+
