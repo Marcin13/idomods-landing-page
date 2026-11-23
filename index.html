@@ -51,6 +51,48 @@
   </header>
 
   <main id="main">
+    <section class="hero" data-hero aria-roledescription="karuzela" aria-labelledby="hero-title">
+      <div class="hero__media">
+        <div class="hero__stage">
+          <div class="hero__slide is-active" data-slide role="group" aria-roledescription="slajd" aria-label="1 z 2">
+            <picture>
+              <source media="(max-width: 47.99rem)" srcset="src/assets/web/hero-plate-960.webp" type="image/webp">
+              <img class="hero__image" src="src/assets/web/hero-plate-1920.webp" alt="" width="1920" height="1080" fetchpriority="high">
+            </picture>
+            <span class="hero__dusk" aria-hidden="true"></span>
+            <button class="lamp lamp--terracotta" type="button" aria-pressed="false" aria-label="Włącz ceglastą lampę" data-lamp="ceglastą">
+              <span class="lamp__float"><span class="lamp__beam"></span><img src="src/assets/web/lamp-terracotta.webp" alt="" width="403" height="382"><span class="lamp__halo"></span><span class="lamp__face"></span></span>
+            </button>
+            <button class="lamp lamp--cream" type="button" aria-pressed="false" aria-label="Włącz kremową lampę" data-lamp="kremową">
+              <span class="lamp__float"><span class="lamp__beam"></span><img src="src/assets/web/lamp-cream.webp" alt="" width="361" height="374"><span class="lamp__halo"></span><span class="lamp__face"></span></span>
+            </button>
+            <button class="lamp lamp--olive" type="button" aria-pressed="false" aria-label="Włącz oliwkową lampę" data-lamp="oliwkową">
+              <span class="lamp__float"><span class="lamp__beam"></span><img src="src/assets/web/lamp-olive.webp" alt="" width="442" height="417"><span class="lamp__halo"></span><span class="lamp__face"></span></span>
+            </button>
+          </div>
+          <div class="hero__slide" data-slide role="group" aria-roledescription="slajd" aria-label="2 z 2" inert>
+            <picture>
+              <source media="(max-width: 47.99rem)" srcset="src/assets/web/hero-2-960.webp" type="image/webp">
+              <img class="hero__image" src="src/assets/web/hero-2-1920.webp" alt="Wnętrze z granatową zabudową, jasną szafą i sufitowymi lampami SOLLUX" width="1920" height="1080">
+            </picture>
+          </div>
+        </div>
+      </div>
+      <div class="hero__container">
+        <p class="hero__eyebrow">Bestsellery SOLLUX</p>
+        <h1 class="hero__title" id="hero-title">Kolor i forma <br>w nowym świetle</h1>
+        <a class="button button--accent" href="#">Sprawdź bestsellery</a>
+      </div>
+      <button class="hero__arrow hero__arrow--prev" type="button" aria-label="Poprzedni slajd" data-prev><img src="src/assets/icons/arrow-left.svg" alt="" width="24" height="24"></button>
+      <button class="hero__arrow hero__arrow--next" type="button" aria-label="Następny slajd" data-next><img src="src/assets/icons/arrow-right.svg" alt="" width="24" height="24"></button>
+      <div class="hero__progress">
+        <span class="is-active" data-segment><i></i></span>
+        <span data-segment><i></i></span>
+        <button class="hero__pause" type="button" aria-label="Zatrzymaj automatyczne przewijanie" data-pause hidden></button>
+      </div>
+      <p class="hero__rating"><strong>4.8</strong> <img src="src/assets/icons/star.svg" alt="na 5 gwiazdek" width="20" height="20"> <span>Uwielbiany przez klientów</span></p>
+    </section>
+
   </main>
 
 </body>

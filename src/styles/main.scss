@@ -338,3 +338,394 @@ address { font-style: normal; }
   &::after { top: 6px; }
 }
 
+// Hero
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  height: clamp(37.5rem, 100svh, 47.5rem);
+  padding: 0 $space-16 8.5rem;
+  overflow: hidden;
+  background: #1b110d;
+  color: $color-white;
+
+  // Mobile keeps all three lamps visible and fades the photo behind the copy.
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 34% 0 34%;
+    background: linear-gradient(to bottom, rgba(27, 17, 13, 0), #1b110d);
+    pointer-events: none;
+
+    @include md { content: none; }
+  }
+
+  @include md {
+    align-items: center;
+    height: clamp(40rem, 100svh, $hero-height);
+    padding-block: $space-64;
+  }
+
+  @include lg { height: $hero-height; }
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 66%;
+  overflow: hidden;
+  container-type: size;
+  isolation: isolate;
+
+  @include md { height: 100%; }
+}
+
+// A 16:9 stage emulates object-fit: cover so lamps stay aligned with the photo.
+.hero__stage {
+  --stage-width: max(100cqw, calc(100cqh * 16 / 9));
+  --stage-height: calc(var(--stage-width) * 9 / 16);
+  --stage-focus: 0.54;
+
+  position: absolute;
+  top: calc((100cqh - var(--stage-height)) / 2);
+  left: calc((100cqw - var(--stage-width)) * var(--stage-focus));
+  width: var(--stage-width);
+  height: var(--stage-height);
+
+  @include md { --stage-focus: 0.5; }
+}
+
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0s linear $duration-slide-fade;
+
+  &.is-active {
+    z-index: 1;
+    opacity: 1;
+    transition: opacity $duration-slide-fade $ease-in-out;
+  }
+
+  &.is-entering { animation: slide-settle $duration-slide-scale $ease-out; }
+}
+
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__dusk {
+  position: absolute;
+  inset: 0;
+  background: rgba(24, 13, 10, 0.64);
+  opacity: 0;
+  transition: opacity $duration-slide-scale $ease-in-out;
+
+  .is-lit > & { opacity: 1; }
+}
+
+.lamp {
+  position: absolute;
+  top: var(--lamp-top);
+  left: var(--lamp-left);
+  width: var(--lamp-width);
+  aspect-ratio: var(--lamp-ratio);
+  padding: 0;
+  border-radius: 50%;
+  will-change: transform;
+
+  img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.lamp--terracotta {
+  --lamp-left: 22.5%;
+  --lamp-top: 40.463%;
+  --lamp-width: 20.99%;
+  --lamp-ratio: 403 / 382;
+  --face-x: 59.6%;
+  --face-y: 67.8%;
+  --face-width: 54.6%;
+  --face-height: 36.6%;
+  --face-rotate: -14deg;
+  --beam-rotate: -14deg;
+  --float-time: 6.4s;
+  --float-delay: -1.2s;
+}
+
+.lamp--cream {
+  --lamp-left: 40.052%;
+  --lamp-top: 10.185%;
+  --lamp-width: 18.802%;
+  --lamp-ratio: 361 / 374;
+  --face-x: 57.9%;
+  --face-y: 66%;
+  --face-width: 58%;
+  --face-height: 38.5%;
+  --face-rotate: -14deg;
+  --beam-rotate: -14deg;
+  --float-time: 7.6s;
+  --float-delay: -3.4s;
+}
+
+.lamp--olive {
+  --lamp-left: 56.302%;
+  --lamp-top: 31.019%;
+  --lamp-width: 23.021%;
+  --lamp-ratio: 442 / 417;
+  --face-x: 20.1%;
+  --face-y: 82.3%;
+  --face-width: 31.7%;
+  --face-height: 26.4%;
+  --face-rotate: 25deg;
+  --beam-rotate: 28deg;
+  --float-time: 5.8s;
+  --float-delay: -2.1s;
+}
+
+.lamp__float {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: lamp-float var(--float-time) $ease-in-out var(--float-delay) infinite alternate;
+}
+
+.lamp__beam,
+.lamp__halo,
+.lamp__face {
+  position: absolute;
+  top: var(--face-y);
+  left: var(--face-x);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $duration-tile-image $ease-in-out;
+}
+
+.lamp__beam {
+  width: 240%;
+  height: 300%;
+  background: radial-gradient(58% 100% at 50% 0, rgba(255, 232, 176, 0.5), rgba(255, 226, 160, 0.14) 58%, rgba(255, 226, 160, 0) 100%);
+  clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%);
+  filter: blur(1.5rem);
+  transform: translateX(-50%) rotate(var(--beam-rotate));
+  transform-origin: 50% 0;
+}
+
+.lamp__halo {
+  width: 150%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(255, 230, 170, 0.78), rgba(255, 214, 130, 0.22) 38%, rgba(255, 214, 130, 0) 68%);
+  transform: translate(-50%, -50%);
+}
+
+.lamp__face {
+  width: var(--face-width);
+  height: var(--face-height);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #fffdf0 30%, #ffe9a6 100%);
+  box-shadow: 0 0 1.5rem rgba(255, 228, 160, 0.9);
+  transform: translate(-50%, -50%) rotate(var(--face-rotate));
+}
+
+.lamp[aria-pressed="true"] {
+  .lamp__beam,
+  .lamp__halo,
+  .lamp__face { opacity: 1; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lamp[aria-pressed="false"]:hover .lamp__face { opacity: 0.45; }
+}
+
+.lamp[aria-pressed="false"]:focus-visible .lamp__face { opacity: 0.45; }
+
+@keyframes slide-settle {
+  from { transform: scale($scale-slide-start); }
+  to { transform: scale(1); }
+}
+
+@keyframes lamp-float {
+  from { transform: translateY(-1.4%) rotate(-1.4deg); }
+  to { transform: translateY(1.4%) rotate(1.4deg); }
+}
+
+@keyframes hero-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.hero__container {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+
+  a { pointer-events: auto; }
+
+  width: 100%;
+  max-width: $container-max;
+  margin-inline: auto;
+}
+
+.hero__eyebrow {
+  margin-bottom: $space-16;
+  font-size: $font-size-16;
+}
+
+.hero__title {
+  margin-bottom: $space-32;
+  font-size: 2.5rem;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-none;
+
+  @include md { font-size: $font-size-56; }
+}
+
+.hero__arrow {
+  position: absolute;
+  z-index: 1;
+  bottom: $space-48;
+  display: grid;
+  place-items: center;
+  width: $control-size;
+  height: $control-size;
+  border-radius: $radius-pill;
+  background: $color-overlay-control;
+
+  @include lg {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+}
+
+.hero__arrow--prev {
+  left: $space-16;
+
+  @include lg { left: $space-72; }
+}
+
+.hero__arrow--next {
+  left: 4.5rem;
+
+  @include lg {
+    right: $space-72;
+    left: auto;
+  }
+}
+
+.hero__progress {
+  position: absolute;
+  z-index: 1;
+  bottom: $space-16;
+  left: 50%;
+  display: flex;
+  gap: $space-4;
+  transform: translateX(-50%);
+
+  @include lg { bottom: $space-32; }
+
+  > span {
+    width: $space-64;
+    height: 2px;
+    overflow: hidden;
+    background: $color-progress-track;
+  }
+
+  i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: $color-accent;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .is-active i { transform: scaleX(1); }
+}
+
+.is-autoplay .hero__progress .is-active i {
+  animation: hero-progress $slide-interval $ease-linear both;
+}
+
+.is-paused .hero__progress .is-active i { animation-play-state: paused; }
+
+.hero__pause {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + #{$space-8});
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border-radius: $radius-pill;
+  transform: translateY(-50%);
+
+  // Larger touch target without moving the centered progress bar.
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -0.625rem;
+  }
+
+  &::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.625rem;
+    border-inline: 2px solid $color-white;
+  }
+
+  &.is-stopped::before {
+    width: 0;
+    height: 0;
+    border-block: 0.3125rem solid transparent;
+    border-inline: 0.5rem solid transparent;
+    border-left-color: $color-white;
+    transform: translateX(0.25rem);
+  }
+}
+
+.hero__rating {
+  position: absolute;
+  z-index: 1;
+  right: $space-16;
+  bottom: $space-48;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  min-height: $control-size;
+  padding: $space-8 $space-16;
+  border-radius: $radius-pill;
+  background: $color-overlay-badge;
+
+  @include lg {
+    right: $space-72;
+    bottom: $space-32;
+    padding: $space-12 $space-24;
+  }
+
+  strong {
+    font-size: $font-size-21;
+    line-height: $line-height-tight;
+  }
+
+  span {
+    margin-left: $space-8;
+    font-size: $font-size-12;
+    line-height: $line-height-tight;
+
+    @include lg {
+      margin-left: $space-12;
+      font-size: $font-size-13;
+    }
+
+    @media (max-width: 22.49rem) { display: none; }
+  }
+}
+
