@@ -27,6 +27,7 @@
     const vec3 INK = vec3(0.0627, 0.0627, 0.0667);
     const vec3 AMBER = vec3(0.44, 0.33, 0.08);
     const vec3 GOLD = vec3(0.949, 0.749, 0.145);
+    const vec3 HOT = vec3(1.0, 0.87, 0.36);
 
     float hash(vec2 p) {
       vec3 q = fract(vec3(p.xyx) * 0.1031);
@@ -71,22 +72,30 @@
       float along = dot(p, vec2(0.6, -0.8));
       vec2 folded = vec2(across, along * 0.3);
 
-      float warpA = fbm(folded * 1.15 + 0.34 * orbit(1.0, 0.0));
-      float warpB = fbm(folded * 0.85 + vec2(4.3, 1.9) + 0.3 * orbit(1.0, 0.4));
-      float drift = 0.55 * sin(TAU * phase);
+      // Every time term uses whole turns, so the 25 s loop stays seamless.
+      float warpA = fbm(folded * 1.2 + 0.52 * orbit(2.0, 0.0));
+      float warpB = fbm(folded * 0.9 + vec2(4.3, 1.9) + 0.46 * orbit(3.0, 0.4));
+      float drift = 1.1 * sin(TAU * phase * 2.0);
 
-      float fine = 0.5 + 0.5 * sin(across * 5.4 + warpA * 4.2 + warpB * 2.6 + drift);
-      float broad = 0.5 + 0.5 * sin(across * 2.2 - along * 0.55 + warpB * 3.4 + TAU * phase);
-      float folds = smoothstep(0.1, 0.96, mix(broad, fine, 0.6));
+      float fine = 0.5 + 0.5 * sin(across * 5.4 + warpA * 5.0 + warpB * 3.0 + drift - TAU * phase * 2.0);
+      float broad = 0.5 + 0.5 * sin(across * 2.2 - along * 0.55 + warpB * 3.8 + TAU * phase * 3.0);
+      float folds = smoothstep(0.08, 0.94, mix(broad, fine, 0.58));
 
-      float rise = smoothstep(0.98, 0.0, uv.y + 0.3 * (warpA - 0.5));
-      float light = folds * rise * rise * 1.28;
+      // Bright streaks travel across the folds in opposite directions.
+      float sweepA = pow(0.5 + 0.5 * sin(across * 3.1 + warpA * 3.6 - TAU * phase * 4.0), 7.0);
+      float sweepB = pow(0.5 + 0.5 * sin(across * 1.6 + along * 0.9 + warpB * 4.4 + TAU * phase * 3.0), 10.0);
+      float pulse = 0.5 + 0.5 * sin(TAU * phase * 3.0 + across * 1.4);
 
-      vec2 center = (uv - vec2(0.5, 0.52)) * vec2(1.25, 1.9);
-      light *= mix(0.62, 1.0, smoothstep(0.1, 0.7, length(center)));
+      float rise = smoothstep(1.05, 0.0, uv.y + 0.34 * (warpA - 0.5) + 0.08 * sin(TAU * phase * 2.0 + p.x * 2.4));
+      float light = (pow(folds, 1.6) * (0.62 + 0.2 * pulse) + 0.5 * sweepA + 0.36 * sweepB) * rise * rise * 1.18;
+
+      // Keeps the copy readable while the light moves around it.
+      vec2 center = (uv - vec2(0.5, 0.47)) * vec2(clamp(aspect, 0.8, 1.6), 2.1);
+      light *= mix(0.1, 1.0, smoothstep(0.22, 0.84, length(center)));
 
       vec3 color = mix(INK, AMBER, smoothstep(0.02, 0.56, light));
-      color = mix(color, GOLD, smoothstep(0.5, 1.08, light));
+      color = mix(color, GOLD, smoothstep(0.52, 1.12, light));
+      color = mix(color, HOT, smoothstep(1.2, 1.75, light));
       color += (hash(gl_FragCoord.xy) - 0.5) / 255.0;
       gl_FragColor = vec4(color, 1.0);
     }
