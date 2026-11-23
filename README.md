@@ -27,6 +27,12 @@ Następnie otwórz plik `index.html` w przeglądarce. Serwer nie jest potrzebny.
 
 Podczas pracy nad stylami uruchom `npm run dev`, aby SCSS kompilował się automatycznie.
 
+## Publikacja
+
+Strona: https://marcin13.github.io/idomods-landing-page/
+
+Po każdym wypchnięciu na `main` GitHub Actions uruchamia `npm run build:site` i publikuje katalog `_site`. Trafiają do niego tylko pliki używane przez stronę, bez README, dokumentacji, źródeł SCSS i konfiguracji.
+
 ## Struktura
 
 | Ścieżka | Zawartość |
