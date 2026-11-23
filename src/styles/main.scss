@@ -118,7 +118,7 @@ address { font-style: normal; }
   color: $color-ink;
 
   &::before { opacity: 1; }
-  img { filter: brightness(0); }
+  img:not(.mega__image) { filter: brightness(0); }
 }
 
 .site-header {
@@ -150,6 +150,26 @@ address { font-style: normal; }
   }
 
   &:has(:focus-visible) { @include header-solid; }
+
+  // Page scrim behind an open desktop panel.
+  @include lg {
+    &::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: rgba(16, 16, 17, 0.42);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity $duration-nav $ease-in-out;
+    }
+  }
+
+  &.is-nav-open {
+    @include header-solid;
+
+    &::after { opacity: 1; }
+  }
 
   &.is-menu-open {
     @include header-solid;
@@ -204,10 +224,13 @@ address { font-style: normal; }
     padding: 0;
   }
 
-  a {
+  > li > a,
+  .main-nav__trigger {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    padding: 0;
     min-height: 3rem;
     gap: $space-4;
     font-size: $font-size-16;
@@ -219,6 +242,205 @@ address { font-style: normal; }
       font-size: $font-size-14;
     }
   }
+}
+
+.site-header .main-nav__trigger img {
+  transition: filter $duration-nav $ease-in-out, transform $duration-nav $ease-in-out;
+}
+
+.is-open > .main-nav__trigger img { transform: rotate(180deg); }
+
+// Dropdown: an accordion on small screens and a full-width panel on desktop.
+.mega {
+  display: none;
+  padding-bottom: $space-12;
+
+  .is-open > & { display: block; }
+
+  @include lg {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: block;
+    padding: 0 $space-16;
+    border-top: 1px solid $color-border;
+    background: $color-white;
+    box-shadow: 0 1.5rem 3rem rgba(16, 16, 17, 0.14);
+    color: $color-ink;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.75rem);
+    transition:
+      opacity $duration-nav $ease-in-out,
+      transform $duration-nav $ease-in-out,
+      visibility 0s linear $duration-nav;
+
+    .is-open > & {
+      z-index: 1;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition-delay: 0s;
+    }
+  }
+}
+
+.mega__inner {
+  @include lg {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 24rem;
+    gap: $space-64;
+    align-items: center;
+    max-width: $container-max;
+    margin-inline: auto;
+    padding-block: $space-32;
+  }
+}
+
+.mega__links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 $space-16;
+
+  @include lg {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: $space-8 $space-32;
+  }
+
+  li {
+    animation: mega-item $duration-nav $ease-out both;
+
+    @include lg {
+      animation: none;
+      opacity: 0;
+      transform: translateY(0.625rem);
+      transition: opacity $duration-nav $ease-in-out, transform $duration-nav $ease-in-out;
+    }
+  }
+
+  @for $i from 1 through 7 {
+    li:nth-child(#{$i}) { animation-delay: #{($i - 1) * 30}ms; }
+    .is-open & li:nth-child(#{$i}) { transition-delay: #{40 + ($i - 1) * 30}ms; }
+  }
+
+  .is-open & li {
+    @include lg {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: $space-8;
+    min-height: 2.75rem;
+    font-size: $font-size-14;
+    font-weight: $font-weight-medium;
+
+    @include lg {
+      font-size: $font-size-21;
+      font-weight: $font-weight-bold;
+      line-height: $line-height-tight;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0.375rem;
+      left: 0;
+      height: 2px;
+      background: $color-accent;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform $duration-nav $ease-in-out;
+    }
+
+    &:hover::after,
+    &:focus-visible::after { transform: scaleX(1); }
+  }
+}
+
+@keyframes mega-item {
+  from { opacity: 0; transform: translateY(0.375rem); }
+  to { opacity: 1; transform: none; }
+}
+
+.mega__swatch {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid rgba(16, 16, 17, 0.2);
+  border-radius: 50%;
+  background: var(--swatch);
+
+  @include lg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.mega__feature {
+  display: none;
+
+  @include lg {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    height: 14rem;
+    padding: $space-24;
+    overflow: hidden;
+    border-radius: $radius-tile;
+    color: $color-ink;
+    font-size: $font-size-16;
+    font-weight: $font-weight-bold;
+    opacity: 0;
+    transform: translateX(1rem);
+    transition: opacity $duration-tile-image $ease-in-out, transform $duration-tile-image $ease-out;
+
+    .is-open & {
+      opacity: 1;
+      transform: none;
+      transition-delay: 60ms;
+    }
+
+    span {
+      position: relative;
+      padding: $space-8 $space-16;
+      border-radius: $radius-pill;
+      background: $color-ink;
+      color: $color-white;
+    }
+  }
+}
+
+.mega__feature--lamp { background: $color-tile-catalog; }
+.mega__feature--color { background: $color-tile-smart; }
+
+.mega__image {
+  position: absolute;
+  top: 50%;
+  right: $space-16;
+  width: auto;
+  height: 88%;
+  transform: translateY(-50%) scale(1.08);
+  transition: transform $duration-slide-scale $ease-out;
+
+  .is-open & { transform: translateY(-50%) scale(1); }
+
+  .mega__feature--room & {
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+  }
+
+  .is-open .mega__feature--room & { transform: scale(1); }
 }
 
 .search {

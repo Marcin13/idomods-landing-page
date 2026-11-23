@@ -23,9 +23,65 @@
 
       <nav class="main-nav" id="main-nav" aria-label="Główna">
         <ul class="main-nav__list">
-          <li><a href="#">Lampy <img src="src/assets/icons/angle-down.svg" alt="" width="16" height="16"></a></li>
-          <li><a href="#">Kolory <img src="src/assets/icons/angle-down.svg" alt="" width="16" height="16"></a></li>
-          <li><a href="#">Pomieszczenia <img src="src/assets/icons/angle-down.svg" alt="" width="16" height="16"></a></li>
+          <li data-nav-item>
+            <button class="main-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-lamps">Lampy <img src="src/assets/icons/angle-down.svg" alt="" width="16" height="16"></button>
+            <div class="mega" id="menu-lamps">
+              <div class="mega__inner">
+                <ul class="mega__links">
+                  <li><a href="#">Sufitowe</a></li>
+                  <li><a href="#">Wiszące</a></li>
+                  <li><a href="#">Ścienne</a></li>
+                  <li><a href="#">Podłogowe</a></li>
+                  <li><a href="#">Stołowe</a></li>
+                  <li><a href="#">Reflektory</a></li>
+                </ul>
+                <a class="mega__feature mega__feature--lamp" href="#">
+                  <img class="mega__image" src="src/assets/web/lamp-terracotta.webp" alt="" width="403" height="382" loading="lazy">
+                  <span>Sprawdź bestsellery</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li data-nav-item>
+            <button class="main-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-colors">Kolory <img src="src/assets/icons/angle-down.svg" alt="" width="16" height="16"></button>
+            <div class="mega" id="menu-colors">
+              <div class="mega__inner">
+                <ul class="mega__links">
+                  <li><a href="#"><span class="mega__swatch" style="--swatch: #f5f5dc"></span>Beżowy</a></li>
+                  <li><a href="#"><span class="mega__swatch" style="--swatch: #beada3"></span>Taupe</a></li>
+                  <li><a href="#"><span class="mega__swatch" style="--swatch: #837060"></span>Brązowy</a></li>
+                  <li><a href="#"><span class="mega__swatch" style="--swatch: #708238"></span>Oliwkowy</a></li>
+                  <li><a href="#"><span class="mega__swatch" style="--swatch: #56663e"></span>Mchowy</a></li>
+                  <li><a href="#"><span class="mega__swatch" style="--swatch: #3f4f8b"></span>Indygo</a></li>
+                  <li><a href="#"><span class="mega__swatch" style="--swatch: #0e2a94"></span>Granatowy</a></li>
+                </ul>
+                <a class="mega__feature mega__feature--color" href="#">
+                  <img class="mega__image" src="src/assets/web/lamp-cream.webp" alt="" width="361" height="374" loading="lazy">
+                  <span>Stwórz swoją lampę</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li data-nav-item>
+            <button class="main-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-rooms">Pomieszczenia <img src="src/assets/icons/angle-down.svg" alt="" width="16" height="16"></button>
+            <div class="mega" id="menu-rooms">
+              <div class="mega__inner">
+                <ul class="mega__links">
+                  <li><a href="#">Salon</a></li>
+                  <li><a href="#">Sypialnia</a></li>
+                  <li><a href="#">Kuchnia</a></li>
+                  <li><a href="#">Jadalnia</a></li>
+                  <li><a href="#">Łazienka</a></li>
+                  <li><a href="#">Przedpokój</a></li>
+                  <li><a href="#">Biuro</a></li>
+                </ul>
+                <a class="mega__feature mega__feature--room" href="#">
+                  <img class="mega__image" src="src/assets/web/hero-2-960.webp" alt="" width="960" height="540" loading="lazy">
+                  <span>Zobacz inspiracje</span>
+                </a>
+              </div>
+            </div>
+          </li>
           <li><a href="#">Nowości</a></li>
           <li><a href="#">Bestsellery</a></li>
           <li><a href="#">Promocje</a></li>
