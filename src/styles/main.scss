@@ -821,9 +821,37 @@ address { font-style: normal; }
   height: 62%;
   object-fit: cover;
   object-position: 100% 0;
+  transition: transform $duration-tile-image $ease-out;
 
   @include md { height: 100%; }
 }
+
+.tile .button {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: $color-button-hover;
+    opacity: 0;
+    transition: opacity $duration-button $ease-in-out;
+  }
+}
+
+@mixin tile-active {
+  .tile__image { transform: scale($scale-tile-hover); }
+  .button::before { opacity: 1; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tile:hover { @include tile-active; }
+}
+
+.tile:has(:focus-visible) { @include tile-active; }
 
 .tile__body {
   position: relative;
