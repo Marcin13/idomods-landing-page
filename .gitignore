@@ -1,3 +1,4 @@
 node_modules/
 .tools/
+_site/
 docs/design/reference/shader-example.gif

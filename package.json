@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "sass --no-source-map --style=compressed src/styles/main.scss dist/main.css",
-    "dev": "sass --watch --no-source-map src/styles/main.scss dist/main.css"
+    "dev": "sass --watch --no-source-map src/styles/main.scss dist/main.css",
+    "build:site": "npm run build && node scripts/build-site.mjs"
   }
 }
