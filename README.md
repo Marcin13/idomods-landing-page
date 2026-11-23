@@ -52,7 +52,9 @@ Zależności deweloperskie to `sass` do kompilacji SCSS oraz `@fontsource-variab
 ## Animacje
 
 - **Menu:** po najechaniu nagłówek przechodzi na białe tło, a tekst, ikony i logo na czarne w 250 ms.
-- **Lampy:** unoszą się, reagują na kursor i włączają po kliknięciu, dotknięciu lub klawiszem Enter.
+- **Górny pasek:** elementy wchodzą kolejno po załadowaniu, złota linia przesuwa się między linkami, a ikony mają mikroanimacje. Przy przewijaniu w dół pasek się chowa, a w górę wraca.
+- **Rozwijane menu:** na desktopie panel wjeżdża z kolejno pojawiającymi się linkami, a na telefonie działa jako akordeon.
+- **Lampy:** unoszą się, reagują na kursor i włączają po kliknięciu, dotknięciu lub klawiszem Enter. Snop i plama światła na skale korzystają z tej samej pozycji co lampa.
 - **Slider:** zmienia slajd co 3 s, z przenikaniem 600 ms, skalowaniem 800 ms i liniowym paskiem postępu.
 - **Kafelki:** obraz powiększa się o 10% w 500 ms, a przycisk zmienia kolor na `#4A4A4A` w 200 ms.
 - **Shader:** działa w WebGL jako bezszwowa pętla 25 s, maksymalnie 30 kl./s, i zatrzymuje się poza ekranem.
@@ -71,7 +73,9 @@ Figma zawiera tylko widok desktop 1920 px, dlatego poniższe zachowania są decy
 - Tło hero odtworzono bez lamp, aby mogły poruszać się jako osobne warstwy.
 - Slider czeka, gdy lampa jest włączona, kursor jest na lampie lub fokus klawiatury znajduje się w hero.
 - Dodano przycisk pauzy, którego nie ma w Figmie, aby użytkownik mógł zatrzymać automatyczny ruch.
-- Kolor tekstu w menu to jedyny wyjątek od zasady „animuj tylko transform i opacity”, bo wytyczna menu wprost wymaga przejścia z białego na czarny.
+- Kolor tekstu i filtr ikon w menu to wyjątki od zasady „animuj tylko transform i opacity”, bo wytyczna menu wprost wymaga przejścia z białego na czarny.
+- Figma pokazuje strzałki przy Lampy, Kolory i Pomieszczenia, ale nie zawiera ich podmenu. Kategorie i układ paneli są propozycją do potwierdzenia.
+- Górny pasek jest przypięty do ekranu. Poza hero ma białe tło, a na telefonie chowa wtedy wyszukiwarkę, aby zajmować mniej miejsca.
 - W tekstach poprawiono „Wpsółpraca” na „Współpraca” oraz „Pobierz aplikacje” na „Pobierz aplikację”.
 
 ## Testy i znane ograniczenia
