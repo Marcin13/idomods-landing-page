@@ -1,0 +1,14 @@
+{
+  "name": "sollux-landing-page",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SOLLUX landing page, IdoMods Frontend + AI recruitment task",
+  "devDependencies": {
+    "@fontsource-variable/red-hat-display": "5.3.0",
+    "sass": "1.108.1"
+  },
+  "scripts": {
+    "build": "sass --no-source-map --style=compressed src/styles/main.scss dist/main.css",
+    "dev": "sass --watch --no-source-map src/styles/main.scss dist/main.css"
+  }
+}
