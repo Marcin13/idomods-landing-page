@@ -6,6 +6,9 @@ $bp-lg: 80rem; // 1280px
 
 @mixin md { @media (min-width: $bp-md) { @content; } }
 @mixin lg { @media (min-width: $bp-lg) { @content; } }
+// Tablet-only ranges: they never reach phones (< 768px) or desktops (>= 1280px).
+@mixin tablet { @media (min-width: $bp-md) and (max-width: $bp-lg - 0.01rem) { @content; } }
+@mixin tablet-wide { @media (min-width: 64rem) and (max-width: $bp-lg - 0.01rem) { @content; } }
 
 @font-face {
   font-family: "Red Hat Display";
@@ -1580,6 +1583,90 @@ address { font-style: normal; }
     min-height: 1.5rem;
 
     @include lg { min-height: 0; }
+  }
+}
+
+// Footer on tablets (768-1279px). Phones and desktops keep the rules above.
+// Portrait: brand row, 3 link columns, payments and awards side by side.
+// Landscape (>= 1024px): 5 link columns and 3 badge columns, close to desktop.
+@include tablet {
+  .site-footer { padding-block: $space-64 $space-32; }
+
+  .footer-top {
+    gap: $space-48;
+    padding-bottom: $space-48;
+  }
+
+  .footer-brand {
+    flex-direction: row;
+    justify-content: space-between;
+    // The logo SVG and the 48px icon buttons both carry 12px of inner space;
+    // pull them out so the visible edges line up with the columns below.
+    margin-inline: -0.75rem;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: $space-32 $space-24;
+
+    ul { gap: $space-2; }
+  }
+
+  .footer-badges {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    section { padding-block: $space-32; }
+
+    section:first-child { padding-right: $space-24; }
+
+    section:nth-child(2) {
+      padding-left: $space-24;
+      border-top: 0;
+      border-left: 1px solid $color-border;
+    }
+
+    section:nth-child(3) { grid-column: 1 / -1; }
+  }
+
+  .footer-caption {
+    gap: $space-16;
+    padding-top: $space-24;
+  }
+
+  .footer-caption__vat {
+    flex-direction: row;
+    align-items: center;
+    gap: $space-24;
+  }
+
+  .footer-caption__vat { justify-content: space-between; }
+
+  .footer-caption__contact {
+    flex-flow: row wrap;
+    align-items: center;
+    gap: $space-8 $space-24;
+  }
+}
+
+@include tablet-wide {
+  // Enough room after the VAT note for the desktop divider line.
+  .footer-caption__line { display: block; }
+
+  .footer-links {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    column-gap: $space-16;
+  }
+
+  .footer-badges {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    section:nth-child(n + 2) { padding-left: $space-24; }
+
+    section:nth-child(3) {
+      grid-column: auto;
+      border-top: 0;
+      border-left: 1px solid $color-border;
+    }
   }
 }
 

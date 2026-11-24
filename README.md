@@ -259,6 +259,7 @@ Figma zawiera tylko widok desktop 1920 px, dlatego poniższe zachowania są decy
 - Wzorzec `docs/design/mobile-390.png` to zaakceptowany zrzut implementacji, a nie ramka z Figmy.
 - Na telefonie wyszukiwarka zajmuje osobny wiersz, a zdjęcie hero przechodzi w ciemne tło pod tekstem.
 - Poniżej 360 px skrót do konfiguratora znika z nagłówka, a link pozostaje w stopce.
+- Stopka na tabletach (768–1279 px) ma własny układ. Logo i ikony mediów społecznościowych stoją w jednym rzędzie. W pionie linki tworzą 3 kolumny, a płatności i nagrody są obok siebie. Od 1024 px linki tworzą 5 kolumn, a płatności, nagrody i sklepy 3 kolumny jak na desktopie. Dane kontaktowe są w rzędzie z zawijaniem. Telefon i desktop zachowują dotychczasowy układ.
 - Na telefonie kafelki tworzą jedną kolumnę, a kafelek THORO ma gradient poprawiający kontrast tekstu.
 - Tło hero odtworzono bez lamp, aby mogły poruszać się jako osobne warstwy.
 - Dodano przycisk pauzy, którego nie ma w Figmie, aby użytkownik mógł zatrzymać automatyczny ruch.
