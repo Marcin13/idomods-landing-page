@@ -41,6 +41,8 @@ npm run build
 
 Następnie otwórz `index.html` w przeglądarce. Serwer nie jest wymagany.
 
+> **Bez npm też zadziała.** Skompilowany CSS (`dist/main.css`), fonty i obrazy są w repozytorium. Aby tylko obejrzeć stronę, wystarczy wykonać `git clone`, przejść do folderu i otworzyć `index.html` w przeglądarce. Node.js i npm są potrzebne dopiero do zmiany stylów SCSS i budowania wersji produkcyjnej. Przy otwarciu z pliku konsola deweloperska może pokazać błąd CORS dla fontu `red-hat-display-latin-wght-normal.woff2`. To nie wpływa na wygląd strony, bo font ładuje się przez CSS.
+
 Aby zobaczyć dokładnie tę wersję, która trafia na produkcję, zbuduj `_site` i uruchom lokalny serwer:
 
 ```bash
