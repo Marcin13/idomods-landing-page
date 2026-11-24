@@ -17,7 +17,7 @@ Responsywny, animowany landing page marki oświetleniowej SOLLUX, napisany w HTM
 - [Przykłady rozwoju](#przykłady-rozwoju)
 - [Decyzje projektowe](#decyzje-projektowe)
 - [Ograniczenia](#ograniczenia)
-- [Planowane](#planowane)
+- [Zapis rozmowy z AI](#zapis-rozmowy-z-ai)
 - [Przebieg pracy](#przebieg-pracy)
 
 ## Cel projektu
@@ -278,9 +278,9 @@ Figma zawiera tylko widok desktop 1920 px, dlatego poniższe zachowania są decy
 - Skrypty są klasyczne, a `main.js` deklaruje nazwy w zakresie globalnym, więc nowe skrypty nie mogą używać tych samych nazw, na przykład `header`.
 - `docs/design/reference/shader-example.gif` jest wykluczony z Gita ze względu na rozmiar, dlatego nie ma go w świeżym klonie.
 
-## Planowane
+## Zapis rozmowy z AI
 
-- Dodanie oczyszczonego zapisu rozmowy z AI w `transcript/`, razem z listą użytych skilli, pluginów i serwerów MCP.
+Oczyszczony zapis pracy z Claude Code jest w [`transcript/`](transcript/). Opis formatu, lista użytych narzędzi AI i zakres usuniętych danych są w [`transcript/README.md`](transcript/README.md). Ten folder nie trafia na GitHub Pages.
 
 ## Przebieg pracy
 
